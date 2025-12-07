@@ -1,0 +1,46 @@
+{% extends 'housemd_escape_room/base.html' %}
+
+{% block content %}
+<div class="hero text-center">
+    <div class="container">
+        <h1 class="display-3">Mystery Mansion Escape Room</h1>
+        <p class="lead">Can you solve the puzzle and escape in 60 minutes?</p>
+        <a href="{% url 'booking' %}" class="btn btn-light btn-lg mt-3">Book Your Adventure</a>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <h3>🔍 Challenging Puzzles</h3>
+            <p>Test your problem-solving skills with intricate puzzles and hidden clues.</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <h3>👥 Team Building</h3>
+            <p>Perfect for groups of 2-10 people. Work together to escape!</p>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <h3>⏱️ 60 Minutes</h3>
+            <p>You have one hour to solve the mystery and escape the room.</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <h2>About The Experience</h2>
+            <p>Welcome to Mystery Mansion, the most thrilling escape room experience in town! You and your team will be locked in a mysterious room filled with puzzles, riddles, and hidden clues.</p>
+            <p>Your mission: work together, think creatively, and escape before time runs out!</p>
+        </div>
+        <div class="col-md-6">
+            <h2>What to Expect</h2>
+            <ul>
+                <li>Immersive storyline and themed rooms</li>
+                <li>Professional game masters</li>
+                <li>Hints available if you get stuck</li>
+                <li>Photo opportunities after your escape</li>
+                <li>Suitable for ages 12+</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
