@@ -1,0 +1,53 @@
+{% extends 'housemd_escape_room/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="mb-4">Book Your Escape Room Experience</h2>
+            
+            <div class="alert alert-info">
+                <strong>Available Time Slots:</strong> 10:00 AM, 12:00 PM, 2:00 PM, 4:00 PM, 6:00 PM, 8:00 PM
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    {{ form.name }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    {{ form.email }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    {{ form.phone }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Date</label>
+                    {{ form.date }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Time</label>
+                    {{ form.time }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Number of People (1-10)</label>
+                    {{ form.number_of_people }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg">Confirm Booking</button>
+            </form>
+
+            <div class="mt-5">
+                <h4>Already Booked Slots</h4>
+                <div id="booked-slots" class="mt-3">
+                    {% for slot in booked_slots %}
+                        <span class="badge bg-secondary me-2 mb-2">{{ slot.date }} at {{ slot.time }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
