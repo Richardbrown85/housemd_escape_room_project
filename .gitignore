@@ -1,1 +1,41 @@
-.venv
+# Python
+*.py[cod]
+*$py.class
+*.so
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+/staticfiles/
+/media/
+
+# Environment variables
+.env
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Heroku
+*.sublime-project
+*.sublime-workspace
+
+# Sensitive files
+local_settings.py
