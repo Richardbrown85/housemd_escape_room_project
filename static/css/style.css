@@ -5,8 +5,8 @@ body {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: #e7e3db;
+    color: grey;
     padding: 100px 0;
 }
 
