@@ -14,7 +14,7 @@ class Booking(models.Model):
     ]
     
     order_number = models.CharField(max_length=32, unique=True, editable=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=20)
@@ -23,6 +23,7 @@ class Booking(models.Model):
     number_of_people = models.IntegerField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='confirmed')
     created_at = models.DateTimeField(auto_now_add=True)
+    is_guest = models.BooleanField(default=False)
     
     def save(self, *args, **kwargs):
         if not self.order_number:

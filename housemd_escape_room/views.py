@@ -27,13 +27,19 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'housemd_escape_room/signup.html', {'form': form})
 
-@login_required
+
 def booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
             booking = form.save(commit=False)
-            booking.user = request.user
+            
+            # NEW: Check if user is logged in
+            if request.user.is_authenticated:
+                booking.user = request.user
+                booking.is_guest = False
+            else:
+                booking.is_guest = True
             
             # Check if slot is available
             existing = Booking.objects.filter(
@@ -51,8 +57,13 @@ def booking(request):
             # Send confirmation email
             send_confirmation_email(booking)
             
-            messages.success(request, f'Booking confirmed! Your order number is {booking.order_number}')
-            return redirect('my_bookings')
+            messages.success(request, f'Booking confirmed! Your order number is {booking.order_number}. Check your email for details.')
+            
+            # NEW: Redirect based on login status
+            if request.user.is_authenticated:
+                return redirect('my_bookings')
+            else:
+                return redirect('booking_confirmation', order_number=booking.order_number)
     else:
         form = BookingForm()
     
@@ -75,6 +86,15 @@ def my_bookings(request):
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'housemd_escape_room/my_bookings.html', {'bookings': bookings})
 
+# NEW: Guest booking confirmation page
+def booking_confirmation(request, order_number):
+    try:
+        booking = Booking.objects.get(order_number=order_number)
+        return render(request, 'housemd_escape_room/booking_confirmation.html', {'booking': booking})
+    except Booking.DoesNotExist:
+        messages.error(request, 'Booking not found.')
+        return redirect('home')
+
 def send_confirmation_email(booking):
     subject = f'Booking Confirmation - Order #{booking.order_number}'
     message = f'''
@@ -87,7 +107,8 @@ Date: {booking.date}
 Time: {booking.time}
 Number of People: {booking.number_of_people}
 
-Please arrive 10 minutes early. We look forward to seeing you!
+Please save this email and bring your order number when you arrive.
+Arrive 10 minutes early. We look forward to seeing you!
 
 Best regards,
 Escape Room Team

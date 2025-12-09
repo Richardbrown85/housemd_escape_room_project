@@ -5,6 +5,6 @@ from .models import Booking
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     list_display = ['order_number', 'name', 'email', 'date', 'time', 'number_of_people', 'status', 'created_at']
-    list_filter = ['status', 'date']
+    list_filter = ['status', 'date', 'is_guest']
     search_fields = ['order_number', 'name', 'email']
     date_hierarchy = 'date'

@@ -1,0 +1,53 @@
+{% extends 'housemd_escape_room/base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-body text-center p-5">
+                    <div class="mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="green" class="bi bi-check-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                        </svg>
+                    </div>
+                    
+                    <h1 class="text-success mb-4">Booking Confirmed!</h1>
+                    
+                    <div class="alert alert-success">
+                        <h4>Your Order Number: <strong>{{ booking.order_number }}</strong></h4>
+                        <p class="mb-0">Please save this number for your records</p>
+                    </div>
+                    
+                    <div class="card bg-light mt-4">
+                        <div class="card-body text-start">
+                            <h5 class="card-title">Booking Details</h5>
+                            <hr>
+                            <p><strong>Name:</strong> {{ booking.name }}</p>
+                            <p><strong>Email:</strong> {{ booking.email }}</p>
+                            <p><strong>Date:</strong> {{ booking.date }}</p>
+                            <p><strong>Time:</strong> {{ booking.time }}</p>
+                            <p><strong>Number of People:</strong> {{ booking.number_of_people }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <strong>📧 Confirmation Email Sent!</strong>
+                        <p class="mb-0">We've sent a confirmation to {{ booking.email }}</p>
+                    </div>
+                    
+                    <p class="text-muted mt-4">
+                        Please arrive 10 minutes before your scheduled time.<br>
+                        Bring your order number with you!
+                    </p>
+                    
+                    <div class="mt-4">
+                        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

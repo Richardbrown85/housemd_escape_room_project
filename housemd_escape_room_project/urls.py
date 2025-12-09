@@ -27,5 +27,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='housemd_escape_room/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('my-bookings/', views.my_bookings, name='my_bookings'),
+    path('booking-confirmation/<str:order_number>/', views.booking_confirmation, name='booking_confirmation'),
 ]
 
