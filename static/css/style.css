@@ -1,4 +1,14 @@
-/* General Styles */
+/* Google fonts import */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&display=swap');
+
+/* CSS Variables */
+:root {
+    --primary-font: "Inter", sans-serif;
+    --secondary-font: "Michroma", sans-serif;
+}
+
+/* Global Styles */
 body {
     padding-top: 60px;
 }
