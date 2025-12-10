@@ -20,13 +20,20 @@
 
 /* Global Styles */
 body {
+    background-color: var(--secondary-color);
     padding-top: 60px;
+}
+
+h1 {
+    font-family: var(--secondary-font);
 }
 
 /* Hero Section */
 .hero {
-    background: #e7e3db;
-    color: grey;
+    background-image: url(../images/hero-section-image.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: var(--primary-color);
     padding: 100px 0;
 }
 
