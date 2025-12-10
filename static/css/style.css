@@ -6,6 +6,16 @@
 :root {
     --primary-font: "Inter", sans-serif;
     --secondary-font: "Michroma", sans-serif;
+    --primary-color: #0A0A0A;
+    /* shadow black */
+    --secondary-color: #E7E3DB;
+    /* bone */
+    --third-color: #2B2F31;
+    /* charcoal scan grey */
+    --highlight-color: #B56A2B;
+    /* warm rust amber */
+    --light-highlight-color: #7D96A1;
+    /* low saturation blue */
 }
 
 /* Global Styles */
