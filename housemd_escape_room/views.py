@@ -1,21 +1,23 @@
 from django.shortcuts import render
 
 # Create your views here.
+import json
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-from django.db.models import Q
 from datetime import datetime, timedelta
 from .models import Booking
 from .forms import BookingForm, SignUpForm
 
 def home(request):
+    """Homepage view"""
     return render(request, 'housemd_escape_room/home.html')
 
 def signup(request):
+    """User signup view"""
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
@@ -27,14 +29,14 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'housemd_escape_room/signup.html', {'form': form})
 
-
 def booking(request):
+    """Booking page with calendar"""
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
             booking = form.save(commit=False)
             
-            # NEW: Check if user is logged in
+            # Check if user is logged in
             if request.user.is_authenticated:
                 booking.user = request.user
                 booking.is_guest = False
@@ -59,7 +61,7 @@ def booking(request):
             
             messages.success(request, f'Booking confirmed! Your order number is {booking.order_number}. Check your email for details.')
             
-            # NEW: Redirect based on login status
+            # Redirect based on login status
             if request.user.is_authenticated:
                 return redirect('my_bookings')
             else:
@@ -67,27 +69,36 @@ def booking(request):
     else:
         form = BookingForm()
     
-    # Get booked slots for next 30 days
+    # Get booked slots for next 60 days
     today = datetime.now().date()
-    end_date = today + timedelta(days=30)
+    end_date = today + timedelta(days=60)
     booked_slots = Booking.objects.filter(
         date__gte=today,
         date__lte=end_date,
         status__in=['confirmed', 'pending']
     ).values('date', 'time')
     
+    # Format for JavaScript
+    booked_list = []
+    for slot in booked_slots:
+        booked_list.append({
+            'date': slot['date'].strftime('%Y-%m-%d'),
+            'time': slot['time'].strftime('%H:%M')
+        })
+    
     return render(request, 'housemd_escape_room/booking.html', {
         'form': form,
-        'booked_slots': list(booked_slots)
+        'booked_slots': json.dumps(booked_list)
     })
 
 @login_required
 def my_bookings(request):
+    """View user's bookings"""
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'housemd_escape_room/my_bookings.html', {'bookings': bookings})
 
-# NEW: Guest booking confirmation page
 def booking_confirmation(request, order_number):
+    """Guest booking confirmation page"""
     try:
         booking = Booking.objects.get(order_number=order_number)
         return render(request, 'housemd_escape_room/booking_confirmation.html', {'booking': booking})
@@ -96,6 +107,7 @@ def booking_confirmation(request, order_number):
         return redirect('home')
 
 def send_confirmation_email(booking):
+    """Send booking confirmation email"""
     subject = f'Booking Confirmation - Order #{booking.order_number}'
     message = f'''
 Dear {booking.name},

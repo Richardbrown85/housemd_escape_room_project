@@ -1,58 +1,151 @@
 {% extends 'housemd_escape_room/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h2 class="mb-4">Book Your Escape Room Experience</h2>
-            <div class="alert alert-info">
-    <strong>👤 Account Optional:</strong> You can book as a guest or 
-    <a href="{% url 'login' %}" class="alert-link">login</a> / 
-    <a href="{% url 'signup' %}" class="alert-link">sign up</a> to track your bookings.
-</div>
-            
-            <div class="alert alert-info">
-                <strong>Available Time Slots:</strong> 10:00 AM, 12:00 PM, 2:00 PM, 4:00 PM, 6:00 PM, 8:00 PM
+    <!-- Page Header -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 mb-2">Book Your Escape Room Experience</h1>
+        <p class="lead text-muted">Select a date and time that works for you</p>
+    </div>
+
+    <div class="row">
+        <!-- LEFT: Calendar -->
+        <div class="col-lg-5 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+                    <!-- Month Navigation -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <button id="prevMonth" class="btn btn-outline-secondary btn-sm">
+                            ← Previous
+                        </button>
+                        <h4 id="currentMonth" class="mb-0">December 2024</h4>
+                        <button id="nextMonth" class="btn btn-outline-secondary btn-sm">
+                            Next →
+                        </button>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="calendar-grid" id="calendarGrid">
+                        <!-- Days of week header -->
+                        <div class="calendar-header">Sun</div>
+                        <div class="calendar-header">Mon</div>
+                        <div class="calendar-header">Tue</div>
+                        <div class="calendar-header">Wed</div>
+                        <div class="calendar-header">Thu</div>
+                        <div class="calendar-header">Fri</div>
+                        <div class="calendar-header">Sat</div>
+                        
+                        <!-- Days will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="mt-4 pt-3 border-top">
+                        <small class="text-muted d-block mb-2">Availability:</small>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <small><span class="dot dot-available"></span> Available</small>
+                            <small><span class="dot dot-limited"></span> Limited</small>
+                            <small><span class="dot dot-full"></span> Fully Booked</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Time Slots & Booking Form -->
+        <div class="col-lg-7">
+            <!-- Time Slots Section -->
+            <div id="timeSlotsSection" style="display: none;">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3" id="selectedDateTitle">Select a time</h5>
+                        <div id="timeSlotsList" class="time-slots-container">
+                            <!-- Time slots will be populated here -->
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <form method="post">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label class="form-label">Full Name</label>
-                    {{ form.name }}
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    {{ form.email }}
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Phone</label>
-                    {{ form.phone }}
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Date</label>
-                    {{ form.date }}
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Time</label>
-                    {{ form.time }}
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Number of People (1-10)</label>
-                    {{ form.number_of_people }}
-                </div>
-                <button type="submit" class="btn btn-primary btn-lg">Confirm Booking</button>
-            </form>
+            <!-- Booking Form (shown after time selection) -->
+            <div id="bookingFormSection" style="display: none;">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3">Your Details</h5>
+                        
+                        <div class="alert alert-info mb-4">
+                            <strong>Selected:</strong> 
+                            <span id="confirmDateTime">No date/time selected</span>
+                        </div>
 
-            <div class="mt-5">
-                <h4>Already Booked Slots</h4>
-                <div id="booked-slots" class="mt-3">
-                    {% for slot in booked_slots %}
-                        <span class="badge bg-secondary me-2 mb-2">{{ slot.date }} at {{ slot.time }}</span>
-                    {% endfor %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <form method="post" id="bookingForm">
+                            {% csrf_token %}
+                            
+                            <!-- Hidden fields for date and time -->
+                            <input type="hidden" name="date" id="formDate">
+                            <input type="hidden" name="time" id="formTime">
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Full Name *</label>
+                                {{ form.name }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Email *</label>
+                                {{ form.email }}
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Phone *</label>
+                                {{ form.phone }}
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Number of People (1-10) *</label>
+                                {{ form.number_of_people }}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                Confirm Booking
+                            </button>
+                        </form>
+
+                        <div class="text-center mt-3">
+                            <small class="text-muted">
+                                👤 Account optional - 
+                                <a href="{% url 'login' %}">login</a> or 
+                                <a href="{% url 'signup' %}">sign up</a> to track bookings
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Initial State: Select a date prompt -->
+            <div id="selectDatePrompt">
+                <div class="text-center p-5">
+                    <div class="mb-3" style="font-size: 3rem;">📅</div>
+                    <h5 class="text-muted">Select a date from the calendar</h5>
+                    <p class="text-muted">Available time slots will appear here</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Pass booked slots data to JavaScript -->
+<script id="booked-slots-data" type="application/json">
+    {{ booked_slots|safe }}
+</script>
+
+<!-- Load Calendar JavaScript -->
+<script src="{% static 'js/calendar-booking.js' %}"></script>
 {% endblock %}
