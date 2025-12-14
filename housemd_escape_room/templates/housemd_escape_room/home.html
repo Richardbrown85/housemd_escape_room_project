@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load static %}
+
 <!-- Hero section -->
 <div class="hero text-center">
     <div class="container">
@@ -12,16 +14,22 @@
 </div>
 
 <!-- Main Content -->
-<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <div id="carouselExampleAutoplaying" class="carousel slide carousel-sm" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="{% static 'images/conference-room.webp' %}" class="d-block w-100 mx-auto" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="{% static 'images/houses-office.webp' %}" class="d-block w-100 mx-auto" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="{% static 'images/diagnostics-lab.webp' %}" class="d-block w-100 mx-auto" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/icu-room.webp' %}" class="d-block w-100 mx-auto" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -32,6 +40,9 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+</div>
+        </div>
+    </div>
 </div>
 
 <div class="container my-5">

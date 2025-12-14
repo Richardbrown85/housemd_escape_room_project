@@ -37,6 +37,17 @@ h1 {
     padding: 100px 0;
 }
 
+.carousel-sm {
+  max-width: 900px;      /* controls width */
+  height: 350px;         /* controls height */
+  margin: auto;          /* center it */
+}
+
+.carousel-sm .carousel-item img {
+  height: 350px;
+  object-fit: cover;     /* prevents stretching */
+}
+
 /* Feature Cards */
 .feature-card {
     text-align: center;
