@@ -48,6 +48,13 @@ h1 {
   object-fit: cover;     /* prevents stretching */
 }
 
+footer {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    font-family: var(--secondary-font);
+}    
+
 /* Feature Cards */
 .feature-card {
     text-align: center;
@@ -111,6 +118,7 @@ h1 {
 .navbar {
     font-family: var(--secondary-font);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: var(--primary-color);
 }
 
 /* Status Badges */
