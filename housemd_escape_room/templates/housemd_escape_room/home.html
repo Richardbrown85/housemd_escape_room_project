@@ -1,12 +1,37 @@
 {% extends 'housemd_escape_room/base.html' %}
 
 {% block content %}
+
+<!-- Hero section -->
 <div class="hero text-center">
     <div class="container">
         <h1 class="display-3">HOUSE.MD Escape Rooms Experience</h1>
         <p class="lead">Can you solve the puzzles and escape in 80 minutes?</p>
         <a href="{% url 'booking' %}" class="btn btn-light btn-lg mt-3">Book Your Experience Today!</a>
     </div>
+</div>
+
+<!-- Main Content -->
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
 <div class="container my-5">
