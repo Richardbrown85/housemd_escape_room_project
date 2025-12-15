@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Dynamic page title that can be overridden by child templates -->
     <title>{% block title %}HOUSE.MD Escape Rooms{% endblock %}</title>
+
+    <!-- Bootstrap CSS from CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Load Django's static files -->
     {% load static %}
+
+    <!-- Custom CSS stylesheet -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
+<!-- Flexbox body to push footer to bottom of viewport -->
+
 <body class="d-flex flex-column min-vh-100">
+
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="{% url 'home' %}">HOUSE.MD Escape Rooms</a>
@@ -20,36 +33,43 @@
                     <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{% url 'booking' %}">Book Now</a></li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'my_bookings' %}">My Bookings</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'my_bookings' %}">My Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
 
+    <!-- Main content area that grows to fill available space -->
     <main class="flex-grow-1">
+
+        <!-- Display Django messages (success, error, info, warning) -->
         {% if messages %}
-            <div class="container mt-3">
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
+        <div class="container mt-3">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
+            {% endfor %}
+        </div>
         {% endif %}
 
+        <!-- Content block where child templates inject their content -->
         {% block content %}{% endblock %}
     </main>
 
+    <!-- Footer that stays at bottom of page with full width -->
     <footer class="bg-dark text-white text-center py-4 mt-auto w-100">
         <p class="mb-0">&copy; 2024 HOUSE.MD Escape Rooms. All rights reserved.</p>
     </footer>
 
+    <!-- Bootstrap JavaScript bundle including Popper for interactive components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
