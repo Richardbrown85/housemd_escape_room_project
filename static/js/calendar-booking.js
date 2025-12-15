@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Available time slots
     const timeSlots = [
-        { value: '10:00', label: '10:00 AM' },
-        { value: '12:00', label: '12:00 PM' },
         { value: '14:00', label: '2:00 PM' },
         { value: '16:00', label: '4:00 PM' },
         { value: '18:00', label: '6:00 PM' },
