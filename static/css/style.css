@@ -33,8 +33,13 @@ h1 {
     background-image: url(../images/hero-section-image.webp);
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     color: var(--primary-color);
     padding: 100px 0;
+
+    /* Fade bottom */
+    -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
 }
 
 .carousel-sm {
