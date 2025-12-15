@@ -44,12 +44,12 @@ h1 {
 
 .carousel-sm {
   max-width: 900px;      /* controls width */
-  height: 350px;         /* controls height */
+  height: 400px;         /* controls height */
   margin: auto;          /* center it */
 }
 
 .carousel-sm .carousel-item img {
-  height: 350px;
+  height: 400px;
   object-fit: cover;     /* prevents stretching */
 }
 
