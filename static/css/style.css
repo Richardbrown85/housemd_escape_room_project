@@ -51,6 +51,11 @@ h1 {
 .carousel-sm .carousel-item img {
   height: 400px;
   object-fit: cover;     /* prevents stretching */
+  border-radius: 10px;
+}
+
+#escape-rooms .card-body {
+    min-height: 300px;
 }
 
 footer {

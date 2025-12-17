@@ -17,7 +17,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-12">
-            <div id="carouselExampleAutoplaying" class="carousel slide carousel-sm" data-bs-ride="carousel">
+            <div id="carouselExampleAutoplaying" class="carousel slide carousel-sm carousel-fade" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="{% static 'images/conference-room.webp' %}" class="d-block w-100 mx-auto" alt="...">
@@ -60,6 +60,61 @@
             <p>Move through all four rooms, solve every puzzle, and uncover the diagnosis before the patient’s time runs out.</p>
         </div>
     </div>
+
+    <section id="escape-rooms" class="container section my-5">
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h3>The HOUSE.MD Experience</h3>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{% static 'images/conference-room.webp' %}" alt="Galaxy Pioneers board game">
+                        <div class="card-body">
+                            <h3 class="card-title sub-heading-color">The Diagnostics Conference Room</h3>
+                            <p class="card-text">Kick off the investigation surrounded by whiteboards, cryptic medical notes, 
+                            and ticking timers. Your team must think like diagnosticians and uncover the first hidden clues.</p>
+                            <p>Duration: 20 minutes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{% static 'images/houses-office.webp' %}"
+                            alt="Mystic Woods board game box">
+                        <div class="card-body">
+                            <h3 class="card-title sub-heading-color">House’s Office</h3>
+                            <p class="card-text">Step into House’s chaotic sanctuary, filled with personal items, 
+                            music, and misdirection. Nothing is where it should be and every detail might be a lie.</p>
+                            <p>Duration: 20 minutes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{% static 'images/diagnostics-lab.webp' %}"
+                            alt="Captain's Gambit board game box">
+                        <div class="card-body">
+                            <h3 class="card-title sub-heading-color">Diagnostics Lab</h3>
+                            <p class="card-text">Analyze samples, scan images, and uncover the truth under UV light. 
+                            Precision, observation, and logic are key as the real diagnosis hides in plain sight.</p>
+                            <p>Duration: 20 minutes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-3">
+                    <div class="card">
+                        <img class="card-img-top" src="{% static 'images/icu-room.webp' %}"
+                            alt="Critter Quest board game box">
+                        <div class="card-body">
+                            <h3 class="card-title sub-heading-color">ICU Corridor</h3>
+                            <p class="card-text">Time is running out. Alarms sound as you piece together 
+                            the final diagnosis and make the call that decides the patient’s fate.</p>
+                            <p>Duration: 20 minutes</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     
 {% endblock %}
