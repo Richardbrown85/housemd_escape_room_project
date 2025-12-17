@@ -76,6 +76,10 @@ p {
     min-height: 340px;
 }
 
+.btn {
+    font-family: var(--secondary-font);
+}
+
 footer {
     width: 100%;
     margin-left: 0;
