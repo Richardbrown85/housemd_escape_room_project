@@ -49,6 +49,17 @@ p {
     mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
 }
 
+/* Navigation */
+.navbar {
+    font-family: var(--secondary-font);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: var(--primary-color);
+}
+
+#navbar .logo {
+    width: 50px;
+}
+
 .carousel-sm {
   max-width: 900px;      /* controls width */
   height: 400px;         /* controls height */
@@ -131,12 +142,7 @@ footer {
     background-color: #f8f9fa;
 }
 
-/* Navigation */
-.navbar {
-    font-family: var(--secondary-font);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    background-color: var(--primary-color);
-}
+
 
 /* Status Badges */
 .status-confirmed {
