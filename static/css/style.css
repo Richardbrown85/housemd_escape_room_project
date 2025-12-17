@@ -24,8 +24,15 @@ body {
     padding-top: 60px;
 }
 
-h1 {
+h1,
+h2,
+h3,
+h4 {
     font-family: var(--secondary-font);
+}
+
+p {
+    font-family: var(--primary-font);
 }
 
 /* Hero Section */
@@ -55,7 +62,7 @@ h1 {
 }
 
 #escape-rooms .card-body {
-    min-height: 290px;
+    min-height: 340px;
 }
 
 footer {
