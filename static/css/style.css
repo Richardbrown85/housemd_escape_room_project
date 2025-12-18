@@ -103,6 +103,35 @@ p {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);  
 }
 
+/* Contact us section */
+#contact {
+    color: var(--primary-color);
+    padding-bottom: 3rem;
+}
+
+#contact h2 {
+    color: var(--primary-color);
+    padding-top: 15px;
+}
+
+#contact i {
+    color: var(--primary-color)
+    font-size: 1.2rem;
+    margin-right: 15px;
+}
+
+#contact .social-links i {
+    color: var(--primary-color);
+    font-size: 1.9rem;
+    -webkit-transition: color 0.3s ease-in-out;
+    -o-transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
+}
+
+#contact .social-links i:hover {
+    color: var(--third-color);
+}
+
 /* Footer */
 footer {
     width: 100%;
