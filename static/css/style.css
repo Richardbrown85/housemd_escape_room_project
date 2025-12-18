@@ -60,6 +60,7 @@ p {
     width: 50px;
 }
 
+/* Carousel */
 .carousel-sm {
   max-width: 900px;      /* controls width */
   height: 400px;         /* controls height */
@@ -68,10 +69,11 @@ p {
 
 .carousel-sm .carousel-item img {
   height: 400px;
-  object-fit: cover;     /* prevents stretching */
+  object-fit: cover;    
   border-radius: 10px;
 }
 
+/* Escape Room info cards */
 #escape-rooms .card-body {
   min-height: 340px;
 }
@@ -86,28 +88,28 @@ p {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
+/* Book your experience button */
 .btn {
     font-family: var(--secondary-font);
 }
 
+.btn {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;  
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);  
+}
+
+/* Footer */
 footer {
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     font-family: var(--secondary-font);
 }    
-
-/* Feature Cards */
-.feature-card {
-    text-align: center;
-    padding: 30px;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
 
 /* Forms */
 .form-control:focus {
@@ -155,8 +157,6 @@ footer {
 .table thead {
     background-color: #f8f9fa;
 }
-
-
 
 /* Status Badges */
 .status-confirmed {
