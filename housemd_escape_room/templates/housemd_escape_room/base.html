@@ -72,77 +72,49 @@
         {% block content %}{% endblock %}
     </main>
     <!-- Contact us -->
-    <div id="contact" class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 text-center">
-                <h2 class="display-6">Contact us!</h2>
-            </div>
-            <!-- Contact info -->
-            <div class="col-12 col-md-6 col-xl-4">
-                <h3>Contact info</h3>
-                <address>
-                    <strong><i class="fa-solid fa-location-dot"></i> House M.D Experience</strong><br>
-                    123 House M.D<br>
-                    House City, 12345
-                </address>
-                <p><i class="fa-solid fa-phone"></i> 012 345 6789<br>
-                    <i class="fa-regular fa-paper-plane"></i> info@housemd-experience.co</p>
-                <div class="social-links my-4">
-                    <a href="https://www.instagram.com" target="_blank"
-                        aria-label="Visit our Instagram page (opens in a new tab)" rel="noopener"><i
-                            class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.facebook.com" target="_blank"
-                        aria-label="Visit our Facebook page (opens in a new tab)" rel="noopener"><i
-                            class="fa-brands fa-square-facebook"></i></a>
-                    <a href="https://www.x.com" target="_blank" aria-label="Visit our X feed (opens in a new tab)"
-                        rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
-                </div>
-            </div>
-            <!-- Opening times -->
-            <div class="col-12 col-md-6 col-xl-4">
-                <h3>Opening times</h3>
-                <table class="table table-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">Day</th>
-                            <th scope="col">Open</th>
-                            <th scope="col">Closed</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Mon</th>
-                            <td>1pm</td>
-                            <td>10pm</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Tue-Thur</th>
-                            <td>1pm</td>
-                            <td>10pm</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Fri-Sat</th>
-                            <td>1pm</td>
-                            <td>10pm</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Sun</th>
-                            <td>1pm</td>
-                            <td>10pm</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <footer class="contact-footer">
+    <div class="container text-center">
+      <h2>Contact Us</h2>
+      
+      <div class="row g-4">
+        <!-- Address -->
+        <div class="col-md-4">
+          <h3>Address</h3>
+          <p>
+            123 Main Street<br>
+            Springfield, ST 12345<br>
+            United States
+          </p>
+          <a 
+            href="https://maps.google.com/?q=123+Main+Street+Springfield+ST+12345"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="map-link"
+          >
+            View on Google Maps →
+          </a>
         </div>
+
+        <!-- Phone -->
+        <div class="col-md-4">
+          <h3>Phone</h3>
+          <a href="tel:+15551234567">(555) 123-4567</a>
+        </div>
+
+        <!-- Opening Hours -->
+        <div class="col-md-4">
+          <h3>Opening Hours</h3>
+          <p class="mb-1">Monday - Friday: 1:00 pm - 10:00 PM</p>
+          <p class="mb-1">Saturday: 1:00 pm - 10:00 PM</p>
+          <p class="mb-0">Sunday: 1:00 pm - 10:00pm</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="mb-0">© 2024 Your Company Name. All rights reserved.</p>
+      </div>
     </div>
-
-    <!-- Footer that stays at bottom of page with full width -->
-    <footer class="bg-dark text-white text-center py-4 mt-auto w-100">
-        <h4 class="mb-0">&copy; 2025 HOUSE.MD Escape Rooms. All rights reserved.</h4>
-    </footer>
-
-    <!-- Font Awesome Kit-->
-    <script src="https://kit.fontawesome.com/b9eae5150e.js" crossorigin="anonymous"></script>
+  </footer>
 
     <!-- Bootstrap JavaScript bundle including Popper for interactive components -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -60,19 +60,6 @@ p {
     width: 50px;
 }
 
-/* Carousel */
-.carousel-sm {
-  max-width: 900px;      /* controls width */
-  height: 400px;         /* controls height */
-  margin: auto;          /* center it */
-}
-
-.carousel-sm .carousel-item img {
-  height: 400px;
-  object-fit: cover;    
-  border-radius: 10px;
-}
-
 /* Escape Room info cards */
 #escape-rooms .card-body {
   min-height: 340px;
@@ -103,42 +90,53 @@ p {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);  
 }
 
-/* Contact us section */
-#contact {
-    color: var(--primary-color);
-    padding-bottom: 3rem;
-}
+/* Contact us/Footer section */
 
-#contact h2 {
-    color: var(--primary-color);
-    padding-top: 15px;
-}
+.contact-footer {
+      background-color: var(--third-color);
+      color: white;
+      padding: 3rem 0;
+    }
 
-#contact i {
-    color: var(--primary-color)
-    font-size: 1.2rem;
-    margin-right: 15px;
-}
+    .contact-footer h2 {
+      font-size: 1.75rem;
+      font-weight: bold;
+      margin-bottom: 2rem;
+    }
 
-#contact .social-links i {
-    color: var(--primary-color);
-    font-size: 1.9rem;
-    -webkit-transition: color 0.3s ease-in-out;
-    -o-transition: color 0.3s ease-in-out;
-    transition: color 0.3s ease-in-out;
-}
+    .contact-footer h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
 
-#contact .social-links i:hover {
-    color: var(--third-color);
-}
+    .contact-footer p {
+      color: #cbd5e0;
+      line-height: 1.6;
+    }
 
-/* Footer */
-footer {
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    font-family: var(--secondary-font);
-}    
+    .contact-footer a {
+      color: #63b3ed;
+      text-decoration: none;
+    }
+
+    .contact-footer a:hover {
+      color: #90cdf4;
+    }
+
+    .map-link {
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    .footer-bottom {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #4a5568;
+      text-align: center;
+      color: #a0aec0;
+      font-size: 0.875rem;
+    }    
 
 /* Forms */
 .form-control:focus {
