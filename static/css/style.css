@@ -78,6 +78,8 @@ p {
 /* Book your experience button */
 .btn {
     font-family: var(--secondary-font);
+    background-color: var(--third-color);
+    color: var(--secondary-color);
 }
 
 .btn {
@@ -86,6 +88,7 @@ p {
 }
 
 .btn:hover {
+  color: var(--secondary-color);  
   transform: scale(1.01);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);  
 }
@@ -140,19 +143,24 @@ p {
 
 /* Forms */
 .form-control:focus {
-    border-color: #0d6efd;
+    border-color: var(--third-color);
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
 }
 
 /* Buttons */
 .btn-primary {
-    background-color: #0d6efd;
-    border-color: #0d6efd;
+    background-color: var(--third-color);
+    border-color: var(--third-color);
 }
 
 .btn-primary:hover {
-    background-color: #5568d3;
-    border-color: #5568d3;
+    background-color: var(--third-color);
+    border-color: var(--third-color);
+}
+
+.btn-success:hover {
+    background-color: var(--third-color);
+    border-color: var(--third-color);
 }
 
 /* Booking Slots */
@@ -258,14 +266,14 @@ p {
 }
 
 .calendar-day.today {
-    border: 2px solid #0d6efd;
+    border: 2px solid var(--third-color);
     font-weight: 700;
 }
 
 .calendar-day.selected {
-    background-color: #0d6efd;
+    background-color: var(--third-color);
     color: white;
-    border-color: #0d6efd;
+    border-color: var(--third-color);
 }
 
 /* Availability Dots */
@@ -329,15 +337,15 @@ p {
 }
 
 .time-slot:hover {
-    border-color: #0d6efd;
+    border-color: var(--third-color);
     background-color: #f8f9fa;
     transform: translateY(-2px);
 }
 
 .time-slot.selected {
-    background-color: #0d6efd;
+    background-color: var(--third-color);
     color: white;
-    border-color: #0d6efd;
+    border-color: var(--third-color);
 }
 
 .time-slot.booked {
