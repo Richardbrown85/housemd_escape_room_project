@@ -173,6 +173,11 @@ p {
     font-size: 14px;
 }
 
+.alert {
+    background-color: var(--third-color);
+    color: var(--secondary-color);
+}
+
 /* Alerts */
 .alert {
     border-radius: 8px;
@@ -378,5 +383,13 @@ p {
     
     .time-slots-container {
         grid-template-columns: 1fr;
+    }
+
+    #currentMonth {
+        margin: 2px;
+    }
+
+    #btn-text {
+        display: none;
     }
 }
