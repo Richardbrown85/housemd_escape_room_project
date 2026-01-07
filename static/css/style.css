@@ -366,13 +366,27 @@ p {
 }
 
 /* Responsive */
+@media (max-width: 1024px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+    
 @media (max-width: 991px) {
     .time-slots-container {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .card {
+        margin-bottom: 1rem;
+    }
 }
 
 @media (max-width: 576px) {
+    .card {
+        margin-bottom: 1rem;
+    }
+    
     .calendar-grid {
         gap: 4px;
     }
