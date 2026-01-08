@@ -139,7 +139,12 @@ p {
       text-align: center;
       color: #a0aec0;
       font-size: 0.875rem;
-    }    
+    }
+    
+    #social-links i {
+        font-size: 2rem;
+        margin: 4px;
+    }
 
 /* Forms */
 .form-control:focus {
