@@ -7,89 +7,97 @@
 {% load static %}
 
 <!-- Hero section -->
-<div class="hero text-center">
-    <div class="container">
-        <h1 class="display-3">HOUSE.MD Escape Rooms Experience</h1>
-        <br>
-        <h3 class="lead">Can you solve the puzzles and escape in 80 minutes?</h3>
+<section>
+    <div class="hero text-center">
+        <div class="container">
+            <h1 class="display-3">HOUSE.MD Escape Rooms Experience</h1>
+            <br>
+            <h3 class="lead">Can you solve the puzzles and escape in 80 minutes?</h3>
+        </div>
     </div>
-</div>
+</section>
 
 <!-- Main Content -->
+<section>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-4 text-center mb-4">
+                <h3>Four Immersive Rooms</h3>
+                <p>Explore the Diagnostics Conference Room, House’s Office, the Diagnostics Lab, and the ICU Corridor
+                    each packed with unique challenges.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <h3>Medical Mystery Puzzles</h3>
+                <p>Analyze clues from the Diagnostics Conference Room, decode House’s cryptic notes, and piece together
+                    the final diagnosis.</p>
+            </div>
+            <div class="col-md-4 text-center mb-4">
+                <h3>80 Minutes</h3>
+                <p>Move through all four rooms, solve every puzzle, and uncover the diagnosis before the patient’s time
+                    runs out.</p>
+            </div>
+        </div>
+</section>
 
-<div class="container my-5">
+<!-- Escape Room Cards-->
+<section id="escape-rooms" class="container section my-5">
     <div class="row">
-        <div class="col-md-4 text-center mb-4">
-            <h3>Four Immersive Rooms</h3>
-            <p>Explore the Diagnostics Conference Room, House’s Office, the Diagnostics Lab, and the ICU Corridor each packed with unique challenges.</p>
+        <div class="col-12 text-center mb-4">
+            <h3>The HOUSE.MD Experience</h3>
         </div>
-        <div class="col-md-4 text-center mb-4">
-            <h3>Medical Mystery Puzzles</h3>
-            <p>Analyze clues from the Diagnostics Conference Room, decode House’s cryptic notes, and piece together the final diagnosis.</p>
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/conference-room.webp' %}"
+                    alt="Diagnostics conference room escape room">
+                <div class="card-body">
+                    <h3 class="card-title">Diagnostics Conference Room</h3>
+                    <p class="card-text">Kick off the investigation surrounded by whiteboards, cryptic medical notes,
+                        and ticking timers. Your team must think like diagnosticians and uncover the first hidden clues.
+                    </p>
+                    <p>Duration: 20 minutes</p>
+                </div>
+            </div>
         </div>
-        <div class="col-md-4 text-center mb-4">
-            <h3>80 Minutes</h3>
-            <p>Move through all four rooms, solve every puzzle, and uncover the diagnosis before the patient’s time runs out.</p>
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/houses-office.webp' %}"
+                    alt="House themed escape room office">
+                <div class="card-body">
+                    <h3 class="card-title">House’s Office</h3>
+                    <p class="card-text">Step into House’s chaotic sanctuary, filled with personal items,
+                        music, and misdirection. Nothing is where it should be and every detail might be a lie.</p>
+                    <p>Duration: 20 minutes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/diagnostics-lab.webp' %}"
+                    alt="Medical diagnostics lab escape room">
+                <div class="card-body">
+                    <h3 class="card-title">Diagnostics Lab</h3>
+                    <p class="card-text">Analyze samples, scan images, and uncover the truth under UV light.
+                        Precision, observation, and logic are key as the real diagnosis hides in plain sight.</p>
+                    <p>Duration: 20 minutes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="card">
+                <img class="card-img-top" src="{% static 'images/icu-room.webp' %}" alt="Hospital ICU escape room">
+                <div class="card-body">
+                    <h3 class="card-title">ICU Corridor</h3>
+                    <p class="card-text">Time is running out. Alarms sound as you piece together
+                        the final diagnosis and make the call that decides the patient’s fate.</p>
+                    <p>Duration: 20 minutes</p>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="text-center my-4">
+        <a href="{% url 'booking' %}" class="btn btn-dark btn-lg mt-3">Book Your Experience Today!</a>
+    </div>
+</section>
 
-    <section id="escape-rooms" class="container section my-5">
-            <div class="row">
-                <div class="col-12 text-center mb-4">
-                    <h3>The HOUSE.MD Experience</h3>
-                </div>
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'images/conference-room.webp' %}" alt="Diagnostics conference room escape room">
-                        <div class="card-body">
-                            <h3 class="card-title">Diagnostics Conference Room</h3>
-                            <p class="card-text">Kick off the investigation surrounded by whiteboards, cryptic medical notes, 
-                            and ticking timers. Your team must think like diagnosticians and uncover the first hidden clues.</p>
-                            <p>Duration: 20 minutes</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'images/houses-office.webp' %}"
-                            alt="House themed escape room office">
-                        <div class="card-body">
-                            <h3 class="card-title">House’s Office</h3>
-                            <p class="card-text">Step into House’s chaotic sanctuary, filled with personal items, 
-                            music, and misdirection. Nothing is where it should be and every detail might be a lie.</p>
-                            <p>Duration: 20 minutes</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'images/diagnostics-lab.webp' %}"
-                            alt="Medical diagnostics lab escape room">
-                        <div class="card-body">
-                            <h3 class="card-title">Diagnostics Lab</h3>
-                            <p class="card-text">Analyze samples, scan images, and uncover the truth under UV light. 
-                            Precision, observation, and logic are key as the real diagnosis hides in plain sight.</p>
-                            <p>Duration: 20 minutes</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 col-xl-3">
-                    <div class="card">
-                        <img class="card-img-top" src="{% static 'images/icu-room.webp' %}"
-                            alt="Hospital ICU escape room">
-                        <div class="card-body">
-                            <h3 class="card-title">ICU Corridor</h3>
-                            <p class="card-text">Time is running out. Alarms sound as you piece together 
-                            the final diagnosis and make the call that decides the patient’s fate.</p>
-                            <p>Duration: 20 minutes</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center my-4">
-            <a href="{% url 'booking' %}" class="btn btn-dark btn-lg mt-3">Book Your Experience Today!</a>
-            </div>
-        </section>
 
-    
 {% endblock %}
