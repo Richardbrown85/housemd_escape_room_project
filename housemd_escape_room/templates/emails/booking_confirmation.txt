@@ -1,0 +1,25 @@
+HOUSE M.D. ESCAPE ROOM
+Booking Confirmation
+
+Dear {{ booking.name }},
+
+Your booking has been confirmed!
+
+ORDER NUMBER: {{ booking.order_number }}
+Please save this number for your records.
+
+BOOKING DETAILS
+===============
+Name: {{ booking.name }}
+Email: {{ booking.email }}
+Date: {{ booking.date|date:"l, F d, Y" }}
+Time: {{ booking.time|time:"g:i A" }}
+Number of People: {{ booking.number_of_people }}
+
+IMPORTANT: Please arrive 10 minutes before your scheduled time.
+Bring your order number with you!
+
+Questions? Contact us at Housemdescaperooms@gmail.com
+
+© 2026 House M.D. Escape Room. All rights reserved.
+Visit: https://housemd-escape-room-79e8818493da.herokuapp.com/

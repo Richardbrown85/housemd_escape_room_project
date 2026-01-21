@@ -6,7 +6,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives  # CHANGED: Use EmailMultiAlternatives
+from django.template.loader import render_to_string  # ADDED: For rendering templates
 from django.conf import settings
 from datetime import datetime, timedelta
 from .models import Booking
@@ -57,9 +58,14 @@ def booking(request):
             booking.save()
             
             # Send confirmation email
-            send_confirmation_email(booking)
+            email_sent = send_confirmation_email(booking)  # CHANGED: Capture return value
             
-            messages.success(request, f'Booking confirmed! Your order number is {booking.order_number}. Check your email for details.')
+            # UPDATED: Better success message
+            if email_sent:
+                messages.success(request, f'Booking confirmed! Your order number is {booking.order_number}. A confirmation email has been sent to {booking.email}')
+            else:
+                messages.success(request, f'Booking confirmed! Your order number is {booking.order_number}.')
+                messages.warning(request, 'There was an issue sending the confirmation email. Please check your spam folder or contact us.')
             
             # Redirect based on login status
             if request.user.is_authenticated:
@@ -107,32 +113,44 @@ def booking_confirmation(request, order_number):
         return redirect('home')
 
 def send_confirmation_email(booking):
-    """Send booking confirmation email"""
-    subject = f'Booking Confirmation - Order #{booking.order_number}'
-    message = f'''
-Dear {booking.name},
-
-Your escape room booking has been confirmed!
-
-Order Number: {booking.order_number}
-Date: {booking.date}
-Time: {booking.time}
-Number of People: {booking.number_of_people}
-
-Please save this email and bring your order number when you arrive.
-Arrive 10 minutes early. We look forward to seeing you!
-
-Best regards,
-Escape Room Team
-    '''
+    """
+    Send booking confirmation email with HTML template
+    
+    COMPLETELY UPDATED FUNCTION
+    """
+    subject = f'Booking Confirmed - Order #{booking.order_number} - House M.D. Escape Room'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to_email = [booking.email]
+    
+    # Prepare context for email templates
+    context = {
+        'booking': booking
+    }
     
     try:
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [booking.email],
-            fail_silently=False,
+        # Render HTML email template
+        html_content = render_to_string('emails/booking_confirmation.html', context)
+        
+        # Render plain text email template (fallback)
+        text_content = render_to_string('emails/booking_confirmation.txt', context)
+        
+        # Create email with both HTML and plain text versions
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_content,  # Plain text version
+            from_email=from_email,
+            to=to_email
         )
+        
+        # Attach HTML version
+        email.attach_alternative(html_content, "text/html")
+        
+        # Send email
+        email.send(fail_silently=False)
+        
+        print(f"✓ Confirmation email sent successfully to {booking.email}")
+        return True
+        
     except Exception as e:
-        print(f"Email error: {e}")
+        print(f"✗ Error sending confirmation email to {booking.email}: {str(e)}")
+        return False
