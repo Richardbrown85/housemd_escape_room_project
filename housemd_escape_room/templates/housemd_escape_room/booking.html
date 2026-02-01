@@ -144,11 +144,7 @@
 
 <!-- Pass booked slots data to JavaScript -->
 <script id="booked-slots-data" type="application/json">
-    {
-        {
-            booked_slots | safe
-        }
-    }
+    {{ booked_slots|safe }}
 </script>
 
 <!-- Load Calendar JavaScript -->

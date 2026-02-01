@@ -58,9 +58,9 @@ def booking(request):
             booking.save()
             
             # Send confirmation email
-            email_sent = send_confirmation_email(booking)  # CHANGED: Capture return value
+            email_sent = send_confirmation_email(booking)
             
-            # UPDATED: Better success message
+            # Success message
             if email_sent:
                 messages.success(request, f'Booking confirmed! Your order number is {booking.order_number}. A confirmation email has been sent to {booking.email}')
             else:
@@ -78,23 +78,27 @@ def booking(request):
     # Get booked slots for next 60 days
     today = datetime.now().date()
     end_date = today + timedelta(days=60)
-    booked_slots = Booking.objects.filter(
+    bookings = Booking.objects.filter(
         date__gte=today,
         date__lte=end_date,
         status__in=['confirmed', 'pending']
     ).values('date', 'time')
     
-    # Format for JavaScript
-    booked_list = []
-    for slot in booked_slots:
-        booked_list.append({
-            'date': slot['date'].strftime('%Y-%m-%d'),
-            'time': slot['time'].strftime('%H:%M')
-        })
+    # Convert to JSON-friendly format
+    booked_slots = [
+        {
+            'date': booking['date'].strftime('%Y-%m-%d'),
+            'time': booking['time'].strftime('%H:%M')
+        }
+        for booking in bookings
+    ]
+    
+    # Convert to JSON string
+    booked_slots_json = json.dumps(booked_slots)
     
     return render(request, 'housemd_escape_room/booking.html', {
         'form': form,
-        'booked_slots': json.dumps(booked_list)
+        'booked_slots': booked_slots_json
     })
 
 @login_required
