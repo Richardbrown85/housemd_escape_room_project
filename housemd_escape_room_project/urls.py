@@ -21,6 +21,8 @@ from housemd_escape_room import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    
+    # Existing URLs
     path('', views.home, name='home'),
     path('booking/', views.booking, name='booking'),
     path('signup/', views.signup, name='signup'),
@@ -28,5 +30,9 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('my-bookings/', views.my_bookings, name='my_bookings'),
     path('booking-confirmation/<str:order_number>/', views.booking_confirmation, name='booking_confirmation'),
+    
+    # NEW CRUD URLs
+    path('booking/<int:pk>/', views.booking_detail, name='booking_detail'),
+    path('booking/<int:pk>/edit/', views.edit_booking, name='edit_booking'),
+    path('booking/<int:pk>/cancel/', views.cancel_booking, name='cancel_booking'),
 ]
-

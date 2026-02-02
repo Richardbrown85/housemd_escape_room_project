@@ -1,17 +1,15 @@
-from django.shortcuts import render
-
-# Create your views here.
-import json
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.core.mail import EmailMultiAlternatives  # CHANGED: Use EmailMultiAlternatives
-from django.template.loader import render_to_string  # ADDED: For rendering templates
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.conf import settings
-from datetime import datetime, timedelta
+from django.db.models import Q
+from datetime import datetime, timedelta, date
 from .models import Booking
-from .forms import BookingForm, SignUpForm
+from .forms import BookingForm, SignUpForm, BookingSearchForm
+import json
 
 def home(request):
     """Homepage view"""
@@ -101,12 +99,153 @@ def booking(request):
         'booked_slots': booked_slots_json
     })
 
+
+# ============================================
+# ENHANCED: My Bookings with Search/Filter
+# ============================================
 @login_required
 def my_bookings(request):
-    """View user's bookings"""
+    """View user's bookings with search and filter"""
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'housemd_escape_room/my_bookings.html', {'bookings': bookings})
+    
+    # Apply filters
+    search_form = BookingSearchForm(request.GET)
+    
+    if search_form.is_valid():
+        # Search filter
+        search_query = search_form.cleaned_data.get('search')
+        if search_query:
+            bookings = bookings.filter(
+                Q(name__icontains=search_query) |
+                Q(email__icontains=search_query) |
+                Q(order_number__icontains=search_query) |
+                Q(phone__icontains=search_query)
+            )
+        
+        # Status filter
+        status = search_form.cleaned_data.get('status')
+        if status:
+            bookings = bookings.filter(status=status)
+        
+        # Date range filter
+        date_from = search_form.cleaned_data.get('date_from')
+        if date_from:
+            bookings = bookings.filter(date__gte=date_from)
+        
+        date_to = search_form.cleaned_data.get('date_to')
+        if date_to:
+            bookings = bookings.filter(date__lte=date_to)
+    
+    # Separate upcoming and past bookings
+    today = date.today()
+    upcoming_bookings = bookings.filter(date__gte=today).order_by('date', 'time')
+    past_bookings = bookings.filter(date__lt=today).order_by('-date', '-time')
+    
+    context = {
+        'upcoming_bookings': upcoming_bookings,
+        'past_bookings': past_bookings,
+        'search_form': search_form,
+        'total_upcoming': upcoming_bookings.count(),
+        'total_past': past_bookings.count(),
+        'today': today,
+    }
+    
+    return render(request, 'housemd_escape_room/my_bookings.html', context)
 
+
+# ============================================
+# NEW: View Booking Detail
+# ============================================
+@login_required
+def booking_detail(request, pk):
+    """View details of a specific booking"""
+    booking = get_object_or_404(Booking, pk=pk, user=request.user)
+    
+    # Check if booking can be edited or cancelled
+    can_edit = booking.status in ['pending', 'confirmed'] and booking.date >= date.today()
+    can_cancel = booking.status in ['pending', 'confirmed'] and booking.date >= date.today()
+    
+    context = {
+        'booking': booking,
+        'can_edit': can_edit,
+        'can_cancel': can_cancel,
+        'is_past': booking.date < date.today(),
+    }
+    
+    return render(request, 'housemd_escape_room/booking_detail.html', context)
+
+
+# ============================================
+# NEW: Edit Booking
+# ============================================
+@login_required
+def edit_booking(request, pk):
+    """Edit an existing booking"""
+    booking = get_object_or_404(Booking, pk=pk, user=request.user)
+    
+    # Check if booking can be edited
+    if booking.status == 'cancelled':
+        messages.error(request, 'Cannot edit a cancelled booking.')
+        return redirect('booking_detail', pk=pk)
+    
+    if booking.date < date.today():
+        messages.error(request, 'Cannot edit past bookings.')
+        return redirect('booking_detail', pk=pk)
+    
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            updated_booking = form.save(commit=False)
+            updated_booking.user = booking.user
+            updated_booking.is_guest = booking.is_guest
+            updated_booking.save()
+            
+            messages.success(request, f'Booking {booking.order_number} updated successfully!')
+            return redirect('booking_detail', pk=booking.pk)
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = BookingForm(instance=booking)
+    
+    return render(request, 'housemd_escape_room/edit_booking.html', {
+        'form': form,
+        'booking': booking,
+    })
+
+
+# ============================================
+# NEW: Cancel Booking
+# ============================================
+@login_required
+def cancel_booking(request, pk):
+    """Cancel a booking (soft delete)"""
+    booking = get_object_or_404(Booking, pk=pk, user=request.user)
+    
+    # Check if booking can be cancelled
+    if booking.status == 'cancelled':
+        messages.info(request, 'This booking is already cancelled.')
+        return redirect('booking_detail', pk=pk)
+    
+    if booking.date < date.today():
+        messages.error(request, 'Cannot cancel past bookings.')
+        return redirect('booking_detail', pk=pk)
+    
+    if request.method == 'POST':
+        # Soft delete - change status to cancelled
+        booking.status = 'cancelled'
+        booking.save()
+        
+        messages.success(request, f'Booking {booking.order_number} has been cancelled successfully.')
+        return redirect('my_bookings')
+    
+    return render(request, 'housemd_escape_room/cancel_booking.html', {
+        'booking': booking
+    })
+
+
+# ============================================
+# EXISTING: Booking Confirmation (unchanged)
+# ============================================
 def booking_confirmation(request, order_number):
     """Guest booking confirmation page"""
     try:
@@ -116,11 +255,13 @@ def booking_confirmation(request, order_number):
         messages.error(request, 'Booking not found.')
         return redirect('home')
 
+
+# ============================================
+# EXISTING: Email Function (unchanged)
+# ============================================
 def send_confirmation_email(booking):
     """
     Send booking confirmation email with HTML template
-    
-    COMPLETELY UPDATED FUNCTION
     """
     subject = f'Booking Confirmed - Order #{booking.order_number} - House M.D. Escape Room'
     from_email = settings.DEFAULT_FROM_EMAIL
