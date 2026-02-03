@@ -12,6 +12,10 @@
     /* bone */
     --third-color: #2B2F31;
     /* charcoal scan grey */
+    --third-color-dark: #1a1d1f;
+    /* charcoal hover */
+    --third-color-light: #5a6165;
+    /* charcoal light */
     --highlight-color: #B56A2B;
     /* warm rust amber */
     --light-highlight-color: #7D96A1;
@@ -82,227 +86,93 @@ p {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Book your experience button */
+/* Buttons */
 .btn {
     font-family: var(--secondary-font);
     background-color: var(--third-color);
     color: var(--secondary-color);
-}
-
-.btn {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;  
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .btn:hover {
-  color: var(--secondary-color);  
-  transform: scale(1.01);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);  
+    color: var(--secondary-color);
+    transform: scale(1.01);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* My Bookings */
+.btn-primary {
+    background-color: var(--third-color);
+    border-color: var(--third-color);
+}
 
+.btn-primary:hover {
+    background-color: var(--third-color-dark);
+    border-color: var(--third-color-dark);
+}
+
+.btn-success:hover {
+    background-color: var(--third-color);
+    border-color: var(--third-color);
+}
+
+/* Custom theme classes (used across booking pages) */
 .bg-custom {
-    background-color: #2B2F31 !important;
+    background-color: var(--third-color) !important;
     color: white !important;
 }
 
 .text-custom {
-    color: #2B2F31 !important;
+    color: var(--third-color) !important;
 }
 
 .btn-custom {
-    background-color: #2B2F31;
+    background-color: var(--third-color);
     color: white;
-    border: 1px solid #2B2F31;
+    border: 1px solid var(--third-color);
 }
 
 .btn-custom:hover {
-    background-color: #1a1d1f;
+    background-color: var(--third-color-dark);
     color: white;
-    border-color: #1a1d1f;
+    border-color: var(--third-color-dark);
 }
 
 .btn-outline-custom {
-    color: #2B2F31;
-    border-color: #2B2F31;
+    color: var(--third-color);
+    border-color: var(--third-color);
     background-color: transparent;
 }
 
 .btn-outline-custom:hover {
-    background-color: #2B2F31;
+    background-color: var(--third-color);
     color: white;
-    border-color: #2B2F31;
+    border-color: var(--third-color);
 }
 
 .border-custom {
-    border-color: #2B2F31 !important;
+    border-color: var(--third-color) !important;
+}
+
+.badge.bg-custom {
+    background-color: var(--third-color) !important;
+}
+
+.badge.bg-custom-light {
+    background-color: var(--third-color-light) !important;
 }
 
 .card-header.bg-custom {
     border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-.badge.bg-custom {
-    background-color: #2B2F31 !important;
-}
-
-.badge.bg-custom-light {
-    background-color: #5a6165 !important;
-}
-
-.btn-group-sm > .btn {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
 }
 
 thead.bg-custom th {
     border: none;
 }
 
-/* Booking Detail */
-
-.bg-custom {
-    background-color: #2B2F31 !important;
-    color: white !important;
-}
-
-.text-custom {
-    color: #2B2F31 !important;
-}
-
-.btn-custom {
-    background-color: #2B2F31;
-    color: white;
-    border: 1px solid #2B2F31;
-}
-
-.btn-custom:hover {
-    background-color: #1a1d1f;
-    color: white;
-    border-color: #1a1d1f;
-}
-
-.btn-outline-custom {
-    color: #2B2F31;
-    border-color: #2B2F31;
-    background-color: transparent;
-}
-
-.btn-outline-custom:hover {
-    background-color: #2B2F31;
-    color: white;
-    border-color: #2B2F31;
-}
-
-.border-custom {
-    border-color: #2B2F31 !important;
-}
-
-.badge.bg-custom {
-    background-color: #2B2F31 !important;
-}
-
-.badge.bg-custom-light {
-    background-color: #5a6165 !important;
-}
-
-.card-header.bg-custom {
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-/* Edit Booking */
-
-.bg-custom {
-    background-color: #2B2F31 !important;
-    color: white !important;
-}
-
-.text-custom {
-    color: #2B2F31 !important;
-}
-
-.btn-custom {
-    background-color: #2B2F31;
-    color: white;
-    border: 1px solid #2B2F31;
-}
-
-.btn-custom:hover {
-    background-color: #1a1d1f;
-    color: white;
-    border-color: #1a1d1f;
-}
-
-.btn-outline-custom {
-    color: #2B2F31;
-    border-color: #2B2F31;
-    background-color: transparent;
-}
-
-.btn-outline-custom:hover {
-    background-color: #2B2F31;
-    color: white;
-    border-color: #2B2F31;
-}
-
-.border-custom {
-    border-color: #2B2F31 !important;
-}
-
-.badge.bg-custom {
-    background-color: #2B2F31 !important;
-}
-
-.card-header.bg-custom {
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-/* Cancel Booking */
-
-.bg-custom {
-    background-color: #2B2F31 !important;
-    color: white !important;
-}
-
-.text-custom {
-    color: #2B2F31 !important;
-}
-
-.btn-custom {
-    background-color: #2B2F31;
-    color: white;
-    border: 1px solid #2B2F31;
-}
-
-.btn-custom:hover {
-    background-color: #1a1d1f;
-    color: white;
-    border-color: #1a1d1f;
-}
-
-.btn-outline-custom {
-    color: #2B2F31;
-    border-color: #2B2F31;
-    background-color: transparent;
-}
-
-.btn-outline-custom:hover {
-    background-color: #2B2F31;
-    color: white;
-    border-color: #2B2F31;
-}
-
-.border-custom {
-    border-color: #2B2F31 !important;
-}
-
-.badge.bg-custom {
-    background-color: #2B2F31 !important;
-}
-
-.badge.bg-custom-light {
-    background-color: #5a6165 !important;
+.btn-group-sm > .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
 }
 
 a.text-custom {
@@ -369,42 +239,13 @@ a.text-custom:hover {
 /* Forms */
 .form-control:focus {
     border-color: var(--third-color);
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-}
-
-/* Buttons */
-.btn-primary {
-    background-color: var(--third-color);
-    border-color: var(--third-color);
-}
-
-.btn-primary:hover {
-    background-color: var(--third-color);
-    border-color: var(--third-color);
-}
-
-.btn-success:hover {
-    background-color: var(--third-color);
-    border-color: var(--third-color);
-}
-
-/* Booking Slots */
-.booked-slot {
-    display: inline-block;
-    background-color: #e9ecef;
-    padding: 8px 15px;
-    border-radius: 20px;
-    margin: 5px;
-    font-size: 14px;
-}
-
-.alert {
-    background-color: var(--third-color);
-    color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(43, 47, 49, 0.25);
 }
 
 /* Alerts */
 .alert {
+    background-color: var(--third-color);
+    color: var(--secondary-color);
     border-radius: 8px;
 }
 
@@ -446,6 +287,16 @@ a.text-custom:hover {
     padding: 5px 12px;
     border-radius: 15px;
     font-size: 13px;
+}
+
+/* Booking Slots */
+.booked-slot {
+    display: inline-block;
+    background-color: #e9ecef;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin: 5px;
+    font-size: 14px;
 }
 
 /* Calendly-Style Calendar Styling */

@@ -200,7 +200,15 @@ def edit_booking(request, pk):
             updated_booking.is_guest = booking.is_guest
             updated_booking.save()
             
-            messages.success(request, f'Booking {booking.order_number} updated successfully!')
+            # Send update confirmation email
+            email_sent = send_update_email(updated_booking)
+            
+            if email_sent:
+                messages.success(request, f'Booking {booking.order_number} updated successfully! A confirmation email has been sent to {updated_booking.email}.')
+            else:
+                messages.success(request, f'Booking {booking.order_number} updated successfully!')
+                messages.warning(request, 'There was an issue sending the update email. Please check your spam folder or contact us.')
+            
             return redirect('booking_detail', pk=booking.pk)
         else:
             messages.error(request, 'Please correct the errors below.')
@@ -235,7 +243,15 @@ def cancel_booking(request, pk):
         booking.status = 'cancelled'
         booking.save()
         
-        messages.success(request, f'Booking {booking.order_number} has been cancelled successfully.')
+        # Send cancellation email
+        email_sent = send_cancellation_email(booking)
+        
+        if email_sent:
+            messages.success(request, f'Booking {booking.order_number} has been cancelled successfully. A confirmation email has been sent to {booking.email}.')
+        else:
+            messages.success(request, f'Booking {booking.order_number} has been cancelled successfully.')
+            messages.warning(request, 'There was an issue sending the cancellation email. Please check your spam folder or contact us.')
+        
         return redirect('my_bookings')
     
     return render(request, 'housemd_escape_room/cancel_booking.html', {
@@ -298,4 +314,72 @@ def send_confirmation_email(booking):
         
     except Exception as e:
         print(f"✗ Error sending confirmation email to {booking.email}: {str(e)}")
+        return False
+
+
+def send_update_email(booking):
+    """
+    Send booking update email with HTML template
+    """
+    subject = f'Booking Updated - Order #{booking.order_number} - House M.D. Escape Room'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to_email = [booking.email]
+    
+    context = {
+        'booking': booking
+    }
+    
+    try:
+        html_content = render_to_string('emails/booking_update.html', context)
+        text_content = render_to_string('emails/booking_update.txt', context)
+        
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_content,
+            from_email=from_email,
+            to=to_email
+        )
+        
+        email.attach_alternative(html_content, "text/html")
+        email.send(fail_silently=False)
+        
+        print(f"✓ Update email sent successfully to {booking.email}")
+        return True
+        
+    except Exception as e:
+        print(f"✗ Error sending update email to {booking.email}: {str(e)}")
+        return False
+
+
+def send_cancellation_email(booking):
+    """
+    Send booking cancellation email with HTML template
+    """
+    subject = f'Booking Cancelled - Order #{booking.order_number} - House M.D. Escape Room'
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to_email = [booking.email]
+    
+    context = {
+        'booking': booking
+    }
+    
+    try:
+        html_content = render_to_string('emails/booking_cancellation.html', context)
+        text_content = render_to_string('emails/booking_cancellation.txt', context)
+        
+        email = EmailMultiAlternatives(
+            subject=subject,
+            body=text_content,
+            from_email=from_email,
+            to=to_email
+        )
+        
+        email.attach_alternative(html_content, "text/html")
+        email.send(fail_silently=False)
+        
+        print(f"✓ Cancellation email sent successfully to {booking.email}")
+        return True
+        
+    except Exception as e:
+        print(f"✗ Error sending cancellation email to {booking.email}: {str(e)}")
         return False

@@ -1,0 +1,22 @@
+Booking Updated!
+
+Your Order Number: {{ booking.order_number }}
+
+----------------------------------------
+Updated Booking Details
+----------------------------------------
+Name:             {{ booking.name }}
+Email:            {{ booking.email }}
+Phone:            {{ booking.phone }}
+Date:             {{ booking.date|date:"M. j, Y" }}
+Time:             {{ booking.time|time:"g:i a" }}
+Number of People: {{ booking.number_of_people }}
+----------------------------------------
+
+Reminder: Please arrive 10 minutes before your scheduled time and bring your order number.
+
+If you didn't make these changes or something doesn't look right, please contact us as soon as possible.
+
+Questions? Contact us at Housemdescaperooms@gmail.com
+
+© 2026 House M.D. Escape Room. All rights reserved.
