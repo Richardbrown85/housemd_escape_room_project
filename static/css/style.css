@@ -476,7 +476,7 @@ a.text-custom:hover {
         margin: 2px;
     }
 
-    #btn-text {
+    .btn-text {
         display: none;
     }
 }
