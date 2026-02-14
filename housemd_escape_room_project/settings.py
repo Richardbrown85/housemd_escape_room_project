@@ -60,7 +60,7 @@ ROOT_URLCONF = 'housemd_escape_room_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'housemd_escape_room' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
