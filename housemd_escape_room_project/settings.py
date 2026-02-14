@@ -61,13 +61,17 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [BASE_DIR / 'housemd_escape_room' / 'templates'],
-        'APP_DIRS': True,
+        'APP_DIRS': False,  # CHANGED TO FALSE!
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            ],
+            'loaders': [  # ADD THIS!
+                'django.template.loaders.filesystem.Loader',  # Check DIRS first
+                'django.template.loaders.app_directories.Loader',  # Then check apps
             ],
         },
     },
