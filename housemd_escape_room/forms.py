@@ -101,6 +101,14 @@ class SignUpForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+        
+        # Override the help_text to remove <ul> tags and fix HTML nesting
+        self.fields['password1'].help_text = (
+            "Your password can't be too similar to your other personal information. "
+            "Your password must contain at least 8 characters. "
+            "Your password can't be a commonly used password. "
+            "Your password can't be entirely numeric."
+        )
 
 
 class BookingSearchForm(forms.Form):
