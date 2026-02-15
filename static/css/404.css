@@ -1,4 +1,5 @@
 /* Google fonts import */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Michroma&display=swap');
 
 /* CSS Variables */
@@ -71,6 +72,7 @@ section {
 }
 
 @keyframes float {
+
     0%,
     100% {
         transform: translateY(0px);
@@ -121,11 +123,11 @@ h2 {
     .hero {
         background-position: center center;
     }
-    
+
     .container {
         padding: 15px;
     }
-    
+
     .error-code {
         margin-bottom: 20px;
     }
@@ -137,23 +139,23 @@ h2 {
         padding: 40px 10px;
         min-height: 80vh;
     }
-    
+
     .container {
         padding: 10px;
     }
-    
+
     .error-code {
         margin-bottom: 15px;
     }
-    
+
     h1 {
         margin: 10px 0;
     }
-    
+
     h2 {
         margin-bottom: 20px;
     }
-    
+
     .btn {
         width: 90%;
         max-width: 280px;
@@ -165,7 +167,7 @@ h2 {
     .hero {
         min-height: 70vh;
     }
-    
+
     .btn {
         padding: 12px 25px;
     }

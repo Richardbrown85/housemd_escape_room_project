@@ -4,194 +4,197 @@
 
 {% load static %}
 
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <!-- Back Button -->
-            <div class="mb-3">
-                <a href="{% url 'my_bookings' %}" class="btn btn-outline-custom">
-                    <i class="fas fa-arrow-left"></i> Back to My Bookings
-                </a>
-            </div>
-            
-            <!-- Main Booking Card -->
-            <div class="card shadow-lg border-custom">
-                <div class="card-header bg-custom text-white">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h3 class="mb-0">
-                            <i class="fas fa-ticket-alt"></i> Booking Details
-                        </h3>
-                        {% if booking.status == 'confirmed' %}
+<section>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Back Button -->
+                <div class="mb-3">
+                    <a href="{% url 'my_bookings' %}" class="btn btn-outline-custom">
+                        <i class="fas fa-arrow-left"></i> Back to My Bookings
+                    </a>
+                </div>
+
+                <!-- Main Booking Card -->
+                <div class="card shadow-lg border-custom">
+                    <div class="card-header bg-custom text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="mb-0">
+                                <i class="fas fa-ticket-alt"></i> Booking Details
+                            </h3>
+                            {% if booking.status == 'confirmed' %}
                             <span class="badge fs-5 bg-custom">
                                 <i class="fas fa-check-circle"></i> {{ booking.get_status_display }}
                             </span>
-                        {% elif booking.status == 'pending' %}
+                            {% elif booking.status == 'pending' %}
                             <span class="badge fs-5 bg-custom-light">
                                 <i class="fas fa-clock"></i> {{ booking.get_status_display }}
                             </span>
-                        {% elif booking.status == 'cancelled' %}
+                            {% elif booking.status == 'cancelled' %}
                             <span class="badge fs-5 bg-secondary">
                                 <i class="fas fa-times-circle"></i> {{ booking.get_status_display }}
                             </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Order Number -->
+                        <div class="text-center mb-4 p-3 bg-light rounded border-custom">
+                            <h4 class="text-muted mb-1">Order Number</h4>
+                            <h2 class="text-custom mb-0 fw-bold">#{{ booking.order_number }}</h2>
+                        </div>
+
+                        {% if is_past %}
+                        <div class="alert alert-light border-custom">
+                            <i class="fas fa-history"></i> This is a past booking
+                        </div>
                         {% endif %}
-                    </div>
-                </div>
-                
-                <div class="card-body">
-                    <!-- Order Number -->
-                    <div class="text-center mb-4 p-3 bg-light rounded border-custom">
-                        <h4 class="text-muted mb-1">Order Number</h4>
-                        <h2 class="text-custom mb-0 fw-bold">#{{ booking.order_number }}</h2>
-                    </div>
-                    
-                    {% if is_past %}
-                    <div class="alert alert-light border-custom">
-                        <i class="fas fa-history"></i> This is a past booking
-                    </div>
-                    {% endif %}
-                    
-                    {% if booking.status == 'cancelled' %}
-                    <div class="alert alert-light border-custom">
-                        <i class="fas fa-exclamation-triangle"></i> This booking has been cancelled
-                    </div>
-                    {% endif %}
-                    
-                    <!-- Booking Information -->
-                    <div class="row g-4 mb-4">
-                        <div class="col-md-6">
-                            <div class="card h-100 border-custom">
-                                <div class="card-header bg-light border-custom">
-                                    <h5 class="mb-0 text-custom">
-                                        <i class="fas fa-user-circle"></i> Contact Information
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="mb-2">
-                                        <strong><i class="fas fa-user"></i> Name:</strong><br>
-                                        {{ booking.name }}
-                                    </p>
-                                    <p class="mb-2">
-                                        <strong><i class="fas fa-envelope"></i> Email:</strong><br>
-                                        {{ booking.email }}
-                                    </p>
-                                    <p class="mb-0">
-                                        <strong><i class="fas fa-phone"></i> Phone:</strong><br>
-                                        {{ booking.phone }}
-                                    </p>
-                                </div>
-                            </div>
+
+                        {% if booking.status == 'cancelled' %}
+                        <div class="alert alert-light border-custom">
+                            <i class="fas fa-exclamation-triangle"></i> This booking has been cancelled
                         </div>
-                        
-                        <div class="col-md-6">
-                            <div class="card h-100 border-custom">
-                                <div class="card-header bg-light border-custom">
-                                    <h5 class="mb-0 text-custom">
-                                        <i class="fas fa-calendar-alt"></i> Booking Details
-                                    </h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="mb-2">
-                                        <strong><i class="fas fa-calendar"></i> Date:</strong><br>
-                                        {{ booking.date|date:"l, F d, Y" }}
-                                    </p>
-                                    <p class="mb-2">
-                                        <strong><i class="fas fa-clock"></i> Time:</strong><br>
-                                        {{ booking.time|time:"g:i A" }}
-                                    </p>
-                                    <p class="mb-0">
-                                        <strong><i class="fas fa-users"></i> Participants:</strong><br>
-                                        {{ booking.number_of_people }} people
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Timestamps -->
-                    <div class="p-3 bg-light rounded border-custom">
-                        <div class="row">
+                        {% endif %}
+
+                        <!-- Booking Information -->
+                        <div class="row g-4 mb-4">
                             <div class="col-md-6">
-                                <small class="text-muted">
-                                    <i class="fas fa-plus-circle"></i> <strong>Created:</strong> 
-                                    {{ booking.created_at|date:"F d, Y \a\t g:i A" }}
-                                </small>
+                                <div class="card h-100 border-custom">
+                                    <div class="card-header bg-light border-custom">
+                                        <h5 class="mb-0 text-custom">
+                                            <i class="fas fa-user-circle"></i> Contact Information
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-2">
+                                            <strong><i class="fas fa-user"></i> Name:</strong><br>
+                                            {{ booking.name }}
+                                        </p>
+                                        <p class="mb-2">
+                                            <strong><i class="fas fa-envelope"></i> Email:</strong><br>
+                                            {{ booking.email }}
+                                        </p>
+                                        <p class="mb-0">
+                                            <strong><i class="fas fa-phone"></i> Phone:</strong><br>
+                                            {{ booking.phone }}
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6 text-md-end">
-                                <small class="text-muted">
-                                    <i class="fas fa-user-tag"></i> 
-                                    {% if booking.is_guest %}
+
+                            <div class="col-md-6">
+                                <div class="card h-100 border-custom">
+                                    <div class="card-header bg-light border-custom">
+                                        <h5 class="mb-0 text-custom">
+                                            <i class="fas fa-calendar-alt"></i> Booking Details
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="mb-2">
+                                            <strong><i class="fas fa-calendar"></i> Date:</strong><br>
+                                            {{ booking.date|date:"l, F d, Y" }}
+                                        </p>
+                                        <p class="mb-2">
+                                            <strong><i class="fas fa-clock"></i> Time:</strong><br>
+                                            {{ booking.time|time:"g:i A" }}
+                                        </p>
+                                        <p class="mb-0">
+                                            <strong><i class="fas fa-users"></i> Participants:</strong><br>
+                                            {{ booking.number_of_people }} people
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timestamps -->
+                        <div class="p-3 bg-light rounded border-custom">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <small class="text-muted">
+                                        <i class="fas fa-plus-circle"></i> <strong>Created:</strong>
+                                        {{ booking.created_at|date:"F d, Y \a\t g:i A" }}
+                                    </small>
+                                </div>
+                                <div class="col-md-6 text-md-end">
+                                    <small class="text-muted">
+                                        <i class="fas fa-user-tag"></i>
+                                        {% if booking.is_guest %}
                                         <span class="badge bg-secondary">Guest Booking</span>
-                                    {% else %}
+                                        {% else %}
                                         <span class="badge bg-custom">Registered User</span>
-                                    {% endif %}
-                                </small>
+                                        {% endif %}
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                
-                <!-- Action Buttons -->
-                <div class="card-footer bg-light border-custom">
-                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-                        <a href="{% url 'my_bookings' %}" class="btn btn-outline-custom">
-                            <i class="fas fa-list"></i> All Bookings
-                        </a>
-                        
-                        <div class="d-flex gap-2">
-                            {% if can_edit %}
+
+                    <!-- Action Buttons -->
+                    <div class="card-footer bg-light border-custom">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <a href="{% url 'my_bookings' %}" class="btn btn-outline-custom">
+                                <i class="fas fa-list"></i> All Bookings
+                            </a>
+
+                            <div class="d-flex gap-2">
+                                {% if can_edit %}
                                 <a href="{% url 'edit_booking' booking.pk %}" class="btn btn-custom">
                                     <i class="fas fa-edit"></i> Edit Booking
                                 </a>
-                            {% endif %}
-                            
-                            {% if can_cancel %}
+                                {% endif %}
+
+                                {% if can_cancel %}
                                 <a href="{% url 'cancel_booking' booking.pk %}" class="btn btn-danger">
                                     <i class="fas fa-times-circle"></i> Cancel Booking
                                 </a>
-                            {% endif %}
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Important Information -->
-            <div class="card mt-3 border-custom">
-                <div class="card-header bg-light border-custom">
-                    <h5 class="mb-0 text-custom">
-                        <i class="fas fa-info-circle"></i> Important Information
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h6><i class="fas fa-check text-custom"></i> Before Your Visit</h6>
-                            <ul class="small">
-                                <li>Arrive 10 minutes before your scheduled time</li>
-                                <li>Bring a valid ID for verification</li>
-                                <li>Review safety guidelines upon arrival</li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <h6><i class="fas fa-exclamation-triangle text-custom"></i> Cancellation Policy</h6>
-                            <ul class="small">
-                                <li>Free cancellation up to 24 hours before</li>
-                                <li>Modifications allowed until 24 hours prior</li>
-                                <li>Late cancellations may incur a fee</li>
-                            </ul>
+
+                <!-- Important Information -->
+                <div class="card mt-3 border-custom">
+                    <div class="card-header bg-light border-custom">
+                        <h5 class="mb-0 text-custom">
+                            <i class="fas fa-info-circle"></i> Important Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-check text-custom"></i> Before Your Visit</h6>
+                                <ul class="small">
+                                    <li>Arrive 10 minutes before your scheduled time</li>
+                                    <li>Bring a valid ID for verification</li>
+                                    <li>Review safety guidelines upon arrival</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-exclamation-triangle text-custom"></i> Cancellation Policy</h6>
+                                <ul class="small">
+                                    <li>Free cancellation up to 24 hours before</li>
+                                    <li>Modifications allowed until 24 hours prior</li>
+                                    <li>Late cancellations may incur a fee</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Contact Support -->
-            <div class="text-center mt-3 mb-4">
-                <p class="text-muted">
-                    <i class="fas fa-question-circle"></i> Need help? 
-                    <a href="#" class="text-decoration-none text-custom">Contact Support</a> or call us at (555) 123-4567
-                </p>
+
+                <!-- Contact Support -->
+                <div class="text-center mt-3 mb-4">
+                    <p class="text-muted">
+                        <i class="fas fa-question-circle"></i> Need help?
+                        <a href="#" class="text-decoration-none text-custom">Contact Support</a> or call us at (555)
+                        123-4567
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 {% endblock %}

@@ -22,7 +22,7 @@ from housemd_escape_room import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Existing URLs
+   
     path('', views.home, name='home'),
     path('booking/', views.booking, name='booking'),
     path('signup/', views.signup, name='signup'),
@@ -31,20 +31,20 @@ urlpatterns = [
     path('my-bookings/', views.my_bookings, name='my_bookings'),
     path('booking-confirmation/<str:order_number>/', views.booking_confirmation, name='booking_confirmation'),
     
-    # Password Reset URLs
+    
     path('password-reset/', 
      auth_views.PasswordResetView.as_view(
          template_name='housemd_escape_room/password_reset.html',
-         email_template_name='registration/password_reset_email.txt',  # Plain text fallback
-         html_email_template_name='registration/password_reset_email.html',  # YOUR HTML TEMPLATE
-         subject_template_name='registration/password_reset_subject.txt',  # Optional: custom subject
+         email_template_name='registration/password_reset_email.txt',  
+         html_email_template_name='registration/password_reset_email.html',  
+         subject_template_name='registration/password_reset_subject.txt',  
      ), 
      name='password_reset'),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='housemd_escape_room/password_reset_done.html'), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='housemd_escape_room/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='housemd_escape_room/password_reset_complete.html'), name='password_reset_complete'),
     
-    # NEW CRUD URLs
+    
     path('booking/<int:pk>/', views.booking_detail, name='booking_detail'),
     path('booking/<int:pk>/edit/', views.edit_booking, name='edit_booking'),
     path('booking/<int:pk>/cancel/', views.cancel_booking, name='cancel_booking'),

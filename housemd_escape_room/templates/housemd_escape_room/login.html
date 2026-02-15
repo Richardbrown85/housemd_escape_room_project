@@ -6,39 +6,39 @@
 
 <!-- Login Form -->
 <section>
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <h1 class="card-title text-center mb-4">Login</h1>
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" id="username" name="username" class="form-control" required>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Login</h1>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" name="username" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
+                            </div>
+
+                            <!-- Forgot Password Link -->
+                            <div class="text-end mb-3">
+                                <a href="{% url 'password_reset' %}" class="text-custom small">
+                                    Forgot your password?
+                                </a>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" id="password" name="password" class="form-control" required>
-                        </div>
-                        
-                        <!-- Forgot Password Link -->
-                        <div class="text-end mb-3">
-                            <a href="{% url 'password_reset' %}" class="text-custom small">
-                                Forgot your password?
-                            </a>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary w-100">Login</button>
-                    </form>
-                    <div class="text-center mt-3">
-                        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 {% endblock %}

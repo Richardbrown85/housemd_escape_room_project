@@ -99,10 +99,6 @@ def booking(request):
         'booked_slots': booked_slots_json
     })
 
-
-# ============================================
-# ENHANCED: My Bookings with Search/Filter
-# ============================================
 @login_required
 def my_bookings(request):
     """View user's bookings with search and filter"""
@@ -152,10 +148,6 @@ def my_bookings(request):
     
     return render(request, 'housemd_escape_room/my_bookings.html', context)
 
-
-# ============================================
-# NEW: View Booking Detail
-# ============================================
 @login_required
 def booking_detail(request, pk):
     """View details of a specific booking"""
@@ -174,10 +166,6 @@ def booking_detail(request, pk):
     
     return render(request, 'housemd_escape_room/booking_detail.html', context)
 
-
-# ============================================
-# NEW: Edit Booking
-# ============================================
 @login_required
 def edit_booking(request, pk):
     """Edit an existing booking"""
@@ -220,10 +208,6 @@ def edit_booking(request, pk):
         'booking': booking,
     })
 
-
-# ============================================
-# NEW: Cancel Booking
-# ============================================
 @login_required
 def cancel_booking(request, pk):
     """Cancel a booking (soft delete)"""
@@ -258,10 +242,6 @@ def cancel_booking(request, pk):
         'booking': booking
     })
 
-
-# ============================================
-# EXISTING: Booking Confirmation (unchanged)
-# ============================================
 def booking_confirmation(request, order_number):
     """Guest booking confirmation page"""
     try:
@@ -272,9 +252,7 @@ def booking_confirmation(request, order_number):
         return redirect('home')
 
 
-# ============================================
-# EXISTING: Email Function (unchanged)
-# ============================================
+
 def send_confirmation_email(booking):
     """
     Send booking confirmation email with HTML template

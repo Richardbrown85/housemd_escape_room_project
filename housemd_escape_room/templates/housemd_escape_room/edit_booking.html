@@ -4,163 +4,165 @@
 
 {% load static %}
 
-<div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <!-- Back Button -->
-            <div class="mb-3">
-                <a href="{% url 'booking_detail' booking.pk %}" class="btn btn-outline-custom">
-                    <i class="fas fa-arrow-left"></i> Back to Booking
-                </a>
-            </div>
-            
-            <div class="card shadow border-custom">
-                <div class="card-header bg-custom text-white">
-                    <h3 class="mb-0">
-                        <i class="fas fa-edit"></i> Edit Booking #{{ booking.order_number }}
-                    </h3>
+<section>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Back Button -->
+                <div class="mb-3">
+                    <a href="{% url 'booking_detail' booking.pk %}" class="btn btn-outline-custom">
+                        <i class="fas fa-arrow-left"></i> Back to Booking
+                    </a>
                 </div>
-                <div class="card-body">
-                    <div class="alert alert-light border-custom">
-                        <i class="fas fa-info-circle text-custom"></i>
-                        <strong>Note:</strong> Changes to your booking will be saved immediately. 
-                        Make sure all information is correct before submitting.
+
+                <div class="card shadow border-custom">
+                    <div class="card-header bg-custom text-white">
+                        <h3 class="mb-0">
+                            <i class="fas fa-edit"></i> Edit Booking #{{ booking.order_number }}
+                        </h3>
                     </div>
-                    
-                    <form method="post" novalidate>
-                        {% csrf_token %}
-                        
-                        {% if form.non_field_errors %}
+                    <div class="card-body">
+                        <div class="alert alert-light border-custom">
+                            <i class="fas fa-info-circle text-custom"></i>
+                            <strong>Note:</strong> Changes to your booking will be saved immediately.
+                            Make sure all information is correct before submitting.
+                        </div>
+
+                        <form method="post" novalidate>
+                            {% csrf_token %}
+
+                            {% if form.non_field_errors %}
                             <div class="alert alert-danger">
                                 <i class="fas fa-exclamation-circle"></i>
                                 {{ form.non_field_errors }}
                             </div>
-                        {% endif %}
-                        
-                        <!-- Name Field -->
-                        <div class="mb-3">
-                            <label for="{{ form.name.id_for_label }}" class="form-label">
-                                <i class="fas fa-user"></i> Full Name
-                                <span class="text-danger">*</span>
-                            </label>
-                            {{ form.name }}
-                            {% if form.name.errors %}
+                            {% endif %}
+
+                            <!-- Name Field -->
+                            <div class="mb-3">
+                                <label for="{{ form.name.id_for_label }}" class="form-label">
+                                    <i class="fas fa-user"></i> Full Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
                                 <div class="text-danger small">
                                     <i class="fas fa-exclamation-circle"></i> {{ form.name.errors.0 }}
                                 </div>
-                            {% endif %}
-                        </div>
-                        
-                        <!-- Email Field -->
-                        <div class="mb-3">
-                            <label for="{{ form.email.id_for_label }}" class="form-label">
-                                <i class="fas fa-envelope"></i> Email
-                                <span class="text-danger">*</span>
-                            </label>
-                            {{ form.email }}
-                            {% if form.email.errors %}
+                                {% endif %}
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="mb-3">
+                                <label for="{{ form.email.id_for_label }}" class="form-label">
+                                    <i class="fas fa-envelope"></i> Email
+                                    <span class="text-danger">*</span>
+                                </label>
+                                {{ form.email }}
+                                {% if form.email.errors %}
                                 <div class="text-danger small">
                                     <i class="fas fa-exclamation-circle"></i> {{ form.email.errors.0 }}
                                 </div>
-                            {% endif %}
-                        </div>
-                        
-                        <!-- Phone Field -->
-                        <div class="mb-3">
-                            <label for="{{ form.phone.id_for_label }}" class="form-label">
-                                <i class="fas fa-phone"></i> Phone
-                                <span class="text-danger">*</span>
-                            </label>
-                            {{ form.phone }}
-                            {% if form.phone.errors %}
+                                {% endif %}
+                            </div>
+
+                            <!-- Phone Field -->
+                            <div class="mb-3">
+                                <label for="{{ form.phone.id_for_label }}" class="form-label">
+                                    <i class="fas fa-phone"></i> Phone
+                                    <span class="text-danger">*</span>
+                                </label>
+                                {{ form.phone }}
+                                {% if form.phone.errors %}
                                 <div class="text-danger small">
                                     <i class="fas fa-exclamation-circle"></i> {{ form.phone.errors.0 }}
                                 </div>
-                            {% endif %}
-                        </div>
-                        
-                        <!-- Date and Time -->
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.date.id_for_label }}" class="form-label">
-                                    <i class="fas fa-calendar"></i> Date
-                                    <span class="text-danger">*</span>
-                                </label>
-                                {{ form.date }}
-                                {% if form.date.errors %}
+                                {% endif %}
+                            </div>
+
+                            <!-- Date and Time -->
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.date.id_for_label }}" class="form-label">
+                                        <i class="fas fa-calendar"></i> Date
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.date }}
+                                    {% if form.date.errors %}
                                     <div class="text-danger small">
                                         <i class="fas fa-exclamation-circle"></i> {{ form.date.errors.0 }}
                                     </div>
-                                {% endif %}
-                            </div>
-                            
-                            <div class="col-md-6 mb-3">
-                                <label for="{{ form.time.id_for_label }}" class="form-label">
-                                    <i class="fas fa-clock"></i> Time Slot
-                                    <span class="text-danger">*</span>
-                                </label>
-                                {{ form.time }}
-                                {% if form.time.errors %}
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="{{ form.time.id_for_label }}" class="form-label">
+                                        <i class="fas fa-clock"></i> Time Slot
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    {{ form.time }}
+                                    {% if form.time.errors %}
                                     <div class="text-danger small">
                                         <i class="fas fa-exclamation-circle"></i> {{ form.time.errors.0 }}
                                     </div>
-                                {% endif %}
-                                <small class="form-text text-muted">Available slots: 2PM, 4PM, 6PM, 8PM</small>
+                                    {% endif %}
+                                    <small class="form-text text-muted">Available slots: 2PM, 4PM, 6PM, 8PM</small>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <!-- Number of People -->
-                        <div class="mb-3">
-                            <label for="{{ form.number_of_people.id_for_label }}" class="form-label">
-                                <i class="fas fa-users"></i> Number of People
-                                <span class="text-danger">*</span>
-                            </label>
-                            {{ form.number_of_people }}
-                            {% if form.number_of_people.errors %}
+
+                            <!-- Number of People -->
+                            <div class="mb-3">
+                                <label for="{{ form.number_of_people.id_for_label }}" class="form-label">
+                                    <i class="fas fa-users"></i> Number of People
+                                    <span class="text-danger">*</span>
+                                </label>
+                                {{ form.number_of_people }}
+                                {% if form.number_of_people.errors %}
                                 <div class="text-danger small">
                                     <i class="fas fa-exclamation-circle"></i> {{ form.number_of_people.errors.0 }}
                                 </div>
-                            {% endif %}
-                            <small class="form-text text-muted">Minimum 1, Maximum 10 participants</small>
-                        </div>
-                        
-                        <hr class="my-4">
-                        
-                        <!-- Action Buttons -->
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="{% url 'booking_detail' booking.pk %}" class="btn btn-outline-custom">
-                                <i class="fas fa-times"></i> Cancel
-                            </a>
-                            <button type="submit" class="btn btn-custom btn-lg">
-                                <i class="fas fa-save"></i> Save Changes
-                            </button>
-                        </div>
-                    </form>
+                                {% endif %}
+                                <small class="form-text text-muted">Minimum 1, Maximum 10 participants</small>
+                            </div>
+
+                            <hr class="my-4">
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="{% url 'booking_detail' booking.pk %}" class="btn btn-outline-custom">
+                                    <i class="fas fa-times"></i> Cancel
+                                </a>
+                                <button type="submit" class="btn btn-custom btn-lg">
+                                    <i class="fas fa-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer text-muted border-custom">
+                        <small>
+                            <i class="fas fa-info-circle"></i>
+                            All fields marked with <span class="text-danger">*</span> are required.
+                        </small>
+                    </div>
                 </div>
-                
-                <div class="card-footer text-muted border-custom">
-                    <small>
-                        <i class="fas fa-info-circle"></i> 
-                        All fields marked with <span class="text-danger">*</span> are required.
-                    </small>
-                </div>
-            </div>
-            
-            <!-- Warning Box -->
-            <div class="card mt-3 border-custom">
-                <div class="card-header bg-light border-custom">
-                    <h6 class="mb-0 text-custom"><i class="fas fa-exclamation-triangle"></i> Important Notes</h6>
-                </div>
-                <div class="card-body">
-                    <ul class="mb-0 small">
-                        <li>You can only edit bookings that haven't occurred yet</li>
-                        <li>Time slot changes are subject to availability</li>
-                        <li>Modifications within 24 hours may require contacting support</li>
-                    </ul>
+
+                <!-- Warning Box -->
+                <div class="card mt-3 border-custom">
+                    <div class="card-header bg-light border-custom">
+                        <h6 class="mb-0 text-custom"><i class="fas fa-exclamation-triangle"></i> Important Notes</h6>
+                    </div>
+                    <div class="card-body">
+                        <ul class="mb-0 small">
+                            <li>You can only edit bookings that haven't occurred yet</li>
+                            <li>Time slot changes are subject to availability</li>
+                            <li>Modifications within 24 hours may require contacting support</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 {% endblock %}

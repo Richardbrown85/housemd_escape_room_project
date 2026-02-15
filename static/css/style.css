@@ -56,7 +56,7 @@ p {
 /* Navigation */
 .navbar {
     font-family: var(--secondary-font);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: var(--primary-color);
 }
 
@@ -73,17 +73,17 @@ p {
 }
 
 #escape-rooms .card-body {
-  min-height: 340px;
+    min-height: 340px;
 }
 
 #escape-rooms .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 #escape-rooms .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Buttons */
@@ -163,14 +163,14 @@ p {
 }
 
 .card-header.bg-custom {
-    border-bottom: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 thead.bg-custom th {
     border: none;
 }
 
-.btn-group-sm > .btn {
+.btn-group-sm>.btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
 }
@@ -186,55 +186,55 @@ a.text-custom:hover {
 /* Contact us/Footer section */
 
 .contact-footer {
-      background-color: var(--third-color);
-      color: white;
-      padding: 3rem 0;
-    }
+    background-color: var(--third-color);
+    color: white;
+    padding: 3rem 0;
+}
 
-    .contact-footer h2 {
-      font-size: 1.75rem;
-      font-weight: bold;
-      margin-bottom: 2rem;
-    }
+.contact-footer h2 {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
 
-    .contact-footer h3 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
+.contact-footer h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
 
-    .contact-footer p {
-      color: #cbd5e0;
-      line-height: 1.6;
-    }
+.contact-footer p {
+    color: #cbd5e0;
+    line-height: 1.6;
+}
 
-    .contact-footer a {
-      color: #63b3ed;
-      text-decoration: none;
-    }
+.contact-footer a {
+    color: #63b3ed;
+    text-decoration: none;
+}
 
-    .contact-footer a:hover {
-      color: #90cdf4;
-    }
+.contact-footer a:hover {
+    color: #90cdf4;
+}
 
-    .map-link {
-      display: inline-block;
-      margin-top: 0.5rem;
-    }
+.map-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+}
 
-    .footer-bottom {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid #4a5568;
-      text-align: center;
-      color: #a0aec0;
-      font-size: 0.875rem;
-    }
-    
-    #social-links i {
-        font-size: 2rem;
-        margin: 4px;
-    }
+.footer-bottom {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #4a5568;
+    text-align: center;
+    color: #a0aec0;
+    font-size: 0.875rem;
+}
+
+#social-links i {
+    font-size: 2rem;
+    margin: 4px;
+}
 
 /* Forms */
 .form-control:focus {
@@ -252,7 +252,7 @@ a.text-custom:hover {
 /* Cards */
 .card {
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
 
@@ -399,16 +399,16 @@ a.text-custom:hover {
     margin-right: 4px;
 }
 
-.dot-available { 
-    background-color: #28a745; 
+.dot-available {
+    background-color: #28a745;
 }
 
-.dot-limited { 
-    background-color: #ffc107; 
+.dot-limited {
+    background-color: #ffc107;
 }
 
-.dot-full { 
-    background-color: #dc3545; 
+.dot-full {
+    background-color: #dc3545;
 }
 
 /* Time Slots */
@@ -454,20 +454,20 @@ a.text-custom:hover {
 
 /* Media queries */
 
-/* Small devices (phones) */    
+/* Small devices (phones) */
 @media screen and (max-width: 576px) {
     .card {
         margin-bottom: 1rem;
     }
-    
+
     .calendar-grid {
         gap: 4px;
     }
-    
+
     .calendar-day {
         font-size: 0.9rem;
     }
-    
+
     .time-slots-container {
         grid-template-columns: 1fr;
     }
