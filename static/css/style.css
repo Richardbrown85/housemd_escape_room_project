@@ -151,7 +151,7 @@ p {
 }
 
 .border-custom {
-    border-color: var(--third-color) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .badge.bg-custom {
